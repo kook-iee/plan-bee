@@ -1,0 +1,23 @@
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: honeychain_postgres
+    environment:
+      POSTGRES_USER: honeyuser
+      POSTGRES_PASSWORD: honeypassword
+      POSTGRES_DB: honeychain_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: honeychain_mqtt
+    ports:
+      - "1883:1883"
+      - "9002:9001"
+
+volumes:
+  postgres_data:
